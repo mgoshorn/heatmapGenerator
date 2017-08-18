@@ -38,7 +38,7 @@ public class Generator {
 	}
 
 	public static void main(String[] args) {
-		Random rand = new Random(12);
+		Random rand = new Random();
 		Generator generation = new Generator(graphSize);
 		
 		for(int i = 0; i < selectionsTotal; i++) {
