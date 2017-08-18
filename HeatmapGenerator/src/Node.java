@@ -41,13 +41,20 @@ public class Node {
 		ArrayList<Node> neighbors = new ArrayList<>();
 		for(int x = this.x - 1; x < this.x + 2; x++) {
 			for(int y = this.y - 1; y < this.y + 2; y++) {			
-				/*Don't add any nodes if:
-				*	-It goes beyond the graph size
+			
+				//Get x and y values that rollover the matrix
+				int dx = Math.floorMod(x, map.length);
+				int dy = Math.floorMod(y, map[dx].length);
+				
+				//Retrieve the node at this location
+				Node neighbor = map[dx][dy];
+			
+				/* Don't add any nodes if:
 				*	-It is the current node
 				*	-The index location is a null reference
 				*/
-				if(x < 0 || x >= map.length || y < 0 || y >= map[x].length || this.equals(map[x][y]) || map[x][y] == null) continue;
-				neighbors.add(map[x][y]);
+				if(neighbor == null || neighbor.equals(this)) continue;
+				neighbors.add(neighbor);
 			}
 		}
 		return neighbors;

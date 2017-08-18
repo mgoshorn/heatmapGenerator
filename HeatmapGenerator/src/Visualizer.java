@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 public class Visualizer extends JPanel {
 	
-	private static final Dimension windowDimension = new Dimension(1920, 1440);
+	private static final Dimension windowDimension = new Dimension(1600, 1600);
 	private static final long serialVersionUID = -2549534001025211766L;
 	private Generator generator;
 	
@@ -36,13 +36,18 @@ public class Visualizer extends JPanel {
 		int width  = windowDimension.height;
 		
 		//Calculates appropriate cell size for the window dimensions
-		double cellWidth = height / this.generator.map.length;
-		double cellHeight = width / this.generator.map[0].length;
+		double cellWidth = (double)height / this.generator.map.length;
+		double cellHeight = (double)width / this.generator.map[0].length;
+		
+		int size = this.generator.map.length * this.generator.map[0].length;
 		
 		//Iterates through matrix and draws each cell
 		for(int x = 0; x < this.generator.map.length; x++) {
 			for(int y = 0; y < this.generator.map[x].length; y++) {
 				//Get color for this quality
+
+				System.out.printf("%4.2f%%%n", ((float)x*this.generator.map[x].length + y) / size);
+				
 				Color c = findColor(this.generator.map[x][y].getQuality());
 				
 				//Set color to graphics object
@@ -84,7 +89,6 @@ public class Visualizer extends JPanel {
 	 */
 	public static Color findColor(float index) {
 		Color[] interpolationPair = new Color[2];
-		
 		//Determine the index that will be passed for interpolating between the two colors
 		float interpolationIndex = (index * colors.length) % 1f;
 		
@@ -97,7 +101,6 @@ public class Visualizer extends JPanel {
 			//Finds the correct location based on the index value, then adds the two appropriate
 			//colors to the set
 			int location = (int)(index * (float)colors.length);
-			System.out.println(index + ", " + colors.length + ", " + location);
 			interpolationPair[0] = colors[location];
 			interpolationPair[1] = colors[location+1];
 		}

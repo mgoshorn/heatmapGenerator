@@ -10,13 +10,13 @@ public class Generator {
 	Node[][] map;
 	Visualizer visualization;
 	
-	private static final float minimalChange = -0.35f;
-	private static final float maximalChange = 0.01f;
+	private static final float minimalChange = -0.5f;
+	private static final float maximalChange = 0.015f;
 	private static final float deltaMultiplier = maximalChange - minimalChange;
 	
 	
 	//Matrix dimensions
-	private static final Dimension graphSize = new Dimension(300, 300);
+	private static final Dimension graphSize = new Dimension(1000, 1000);
 	
 	/*Number of selections relative to the total nodes in the matrix
 	* Each selection will serve as a entrance into the recursive function which
@@ -38,11 +38,11 @@ public class Generator {
 	}
 
 	public static void main(String[] args) {
-		Random rand = new Random();
+		Random rand = new Random(12);
 		Generator generation = new Generator(graphSize);
 		
 		for(int i = 0; i < selectionsTotal; i++) {
-			System.out.println("Selection " + i + "...");
+			System.out.println("Selection " + i + "/" + selectionsTotal + "(" + ((float)i / selectionsTotal) + "%)");
 			
 			
 			//get starting position
