@@ -40,10 +40,8 @@ public class Generator {
 	public static void main(String[] args) {
 		Random rand = new Random();
 		Generator generation = new Generator(graphSize);
-		
 		for(int i = 0; i < selectionsTotal; i++) {
-			System.out.println("Selection " + i + "/" + selectionsTotal + "(" + ((float)i / selectionsTotal) + "%)");
-			
+			System.out.printf("Selection %d / %d (%5.2f%%)\r", i, selectionsTotal, ((float)i / selectionsTotal * 100));
 			
 			//get starting position
 			int x = rand.nextInt(generation.map.length);
@@ -90,6 +88,7 @@ public class Generator {
 			}
 
 		}
+		System.out.printf("Selection %d / %d (%5.2f%%)%n", selectionsTotal, selectionsTotal, (float)(selectionsTotal / selectionsTotal * 100));
 		
 		//affected Nodes
 		int affected = 0;
@@ -98,7 +97,7 @@ public class Generator {
 				if(generation.map[x][y].getQuality() > 0.05) affected++;
 			}
 		}
-		System.out.println("Affected: " + affected);
+		System.out.println("Nodes affected: " + affected);
 		
 		generation.visualization = new Visualizer(generation);
 		generation.visualization.repaint();

@@ -45,8 +45,7 @@ public class Visualizer extends JPanel {
 		for(int x = 0; x < this.generator.map.length; x++) {
 			for(int y = 0; y < this.generator.map[x].length; y++) {
 				//Get color for this quality
-
-				System.out.printf("%4.2f%%%n", ((float)x*this.generator.map[x].length + y) / size);
+				System.out.printf("Processing visualization: %4.2f%%\r", ((float)x*this.generator.map[x].length*100 + y) / size);
 				
 				Color c = findColor(this.generator.map[x][y].getQuality());
 				
@@ -60,6 +59,8 @@ public class Visualizer extends JPanel {
 				g2.fill(rect);
 			}
 		}
+		System.out.println("Processing visualization: 100.00%");
+		System.out.print("Done!");
 	}
 	
 	//Color set used for visualization
